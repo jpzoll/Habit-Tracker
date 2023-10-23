@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct HabitDetail: View {
+    // 🧩 ObservedObject to access the Habits model
     @ObservedObject var habits: Habits
+    
+    // 📝 State for the current habit
     @State var habit: HabitItem
+    
     var body: some View {
         VStack {
             Text("\(habit.name)")
@@ -20,8 +24,9 @@ struct HabitDetail: View {
                 .font(.headline)
             Button {
                 if let index = habits.items.firstIndex(where: { $0.id == habit.id }) {
+                    // ➕ Increase the day streak and update the model
                     habit.dayStreak += 1
-                    habits.items[index].dayStreak += 1
+                    habits.items[index] = habit
                 }
             } label: {
                 Image(systemName: "plus")

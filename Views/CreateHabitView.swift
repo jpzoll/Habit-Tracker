@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
-
 struct CreateHabitView: View {
+    // 🧩 ObservedObject to access the Habits model
     @ObservedObject var habits: Habits
     
+    // 📝 States for name, description, and emoji input
     @State private var name = ""
     @State private var description = ""
     @State private var emoji = ""
     
+    // 🌐 Environment property to dismiss the view
     @Environment(\.dismiss) var dismiss
+    
+    // 🌈 Environment property to access color scheme
     @Environment(\.colorScheme) var colorScheme
     
+    // 🚦 State to track input validation error
     @State private var isShowingInputError = false
-    
     
     var body: some View {
         NavigationView {
@@ -86,9 +90,11 @@ struct CreateHabitView: View {
                 .toolbar {
                     Button {
                         if name == "" || emoji == "" {
+                            // ❌ Show input error if required fields are empty
                             isShowingInputError = true
                             return
                         }
+                        // ✅ Create a new habit and add it to the list
                         let newHabit = HabitItem(name: name, description: description, emoji: emoji)
                         habits.items.append(newHabit)
                         dismiss()
@@ -105,11 +111,11 @@ struct CreateHabitView: View {
                         isShowingInputError = false
                     }
                 }
-                
             }
         }
     }
 }
+
 
 struct CreateHabitView_Previews: PreviewProvider {
     static var previews: some View {

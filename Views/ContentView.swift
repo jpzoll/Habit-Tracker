@@ -8,27 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
+    // 📂 Initialize the Habits model using @StateObject
     @StateObject var habits = Habits()
+    
+    // 📝 State to control the new habit creation sheet
     @State private var isCreatingNewHabit = false
+    
+    // 📐 Define the grid layout for habit cards
     let layout = [
         GridItem(.adaptive(minimum: 150))
     ]
+    
     var body: some View {
         NavigationView {
             ZStack {
+                // 📜 ScrollView to display habit cards
                 ScrollView {
                     LazyVGrid(columns: layout) {
                         ForEach(habits.items, id: \.id) { habit in
                             NavigationLink {
                                 HabitDetail(habits: habits, habit: habit)
                             } label: {
+                                // 🃏 HabitCard with delete action
                                 HabitCard(habit: habit) { _ in
                                     withAnimation {
                                         habits.onDelete(habit)
                                     }
                                 }
-                                    .frame(width: 170, height: 180)
-                                    .padding(.top, 50)
+                                .frame(width: 170, height: 180)
+                                .padding(.top, 50)
                             }
                         }
                     }
@@ -36,9 +44,9 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.top, 40)
                 .background(Color.gray.opacity(0.5))
-                //.background(Color.indigo.saturation(0.5))
                 .ignoresSafeArea()
                 
+                // ➕ Button to create a new habit
                 VStack {
                     Spacer()
                     Button {
@@ -57,10 +65,8 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $isCreatingNewHabit) {
+            // 📝 Present the CreateHabitView as a sheet
             CreateHabitView(habits: habits)
-        }
-        .onAppear {
-            habits.items = HabitItem.example_habit_list
         }
     }
 }

@@ -7,19 +7,22 @@
 
 import Foundation
 
-struct HabitItem: Identifiable, Codable {
+struct HabitItem: Identifiable, Codable, Equatable {
+    // 🆔 Unique identifier for the habit item
     var id = UUID()
     var name: String
     var description: String
     var emoji: String
     var dayStreak = 0
     
+    // 🎁 Initialize a habit item with name, description, and emoji
     init(name: String, description: String, emoji: String) {
         self.name = name
         self.description = description
         self.emoji = emoji
     }
     
+    // 📜 Example habit list for testing or initialization
     static let example_habit_list: [HabitItem] = [
         HabitItem(name: "Exercise", description: "Work out for 30 minutes", emoji: "🏋️‍♂️"),
         HabitItem(name: "Meditation", description: "Meditate for 10 minutes", emoji: "🧘‍♀️"),
