@@ -3,7 +3,7 @@
 HabitTracker is a powerful SwiftUI-based iOS app designed to help you form and maintain positive habits. Track your daily routines, from exercise and meditation to reading and more, with a visually appealing and easy-to-use interface. Never miss a day of your habits and stay motivated to reach your goals.
 
 <div align="center">
-  <img src="img/ht1.png" width=250>
+  <img src="img/ht1.png" width=200>
 </div>
 
 ## Description
