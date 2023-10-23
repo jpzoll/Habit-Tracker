@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var habits = Habits()
+    @StateObject var habits = Habits()
     @State private var isCreatingNewHabit = false
     let layout = [
         GridItem(.adaptive(minimum: 150))
@@ -20,7 +20,7 @@ struct ContentView: View {
                     LazyVGrid(columns: layout) {
                         ForEach(habits.items, id: \.id) { habit in
                             NavigationLink {
-                                HabitDetail(habit: habit)
+                                HabitDetail(habits: habits, habit: habit)
                             } label: {
                                 HabitCard(habit: habit) { _ in
                                     withAnimation {
@@ -58,6 +58,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $isCreatingNewHabit) {
             CreateHabitView(habits: habits)
+        }
+        .onAppear {
+            habits.items = HabitItem.example_habit_list
         }
     }
 }

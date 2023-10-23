@@ -7,11 +7,12 @@
 
 import Foundation
 
-class HabitItem: Codable, ObservableObject {
-    let id = UUID()
+struct HabitItem: Identifiable, Codable {
+    var id = UUID()
     var name: String
     var description: String
     var emoji: String
+    var dayStreak = 0
     
     init(name: String, description: String, emoji: String) {
         self.name = name
@@ -25,7 +26,7 @@ class HabitItem: Codable, ObservableObject {
         HabitItem(name: "Reading", description: "Read a book for 20 minutes", emoji: "📚"),
         HabitItem(name: "Water Intake", description: "Drink 8 glasses of water", emoji: "💧"),
         HabitItem(name: "Coding", description: "Code for an hour", emoji: "💻"),
-        HabitItem(name: "Gratitude Journal", description: "Write down things you're grateful for", emoji: "📖"),
+        HabitItem(name: "Journal", description: "Write down things you're grateful for", emoji: "📖"),
         HabitItem(name: "Walking", description: "Take a 30-minute walk", emoji: "🚶‍♀️"),
         HabitItem(name: "Learn Something New", description: "Learn a new skill or language", emoji: "🎓"),
         HabitItem(name: "Yoga", description: "Practice yoga for 20 minutes", emoji: "🧘‍♂️"),

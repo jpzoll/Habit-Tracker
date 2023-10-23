@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HabitCard: View {
-    @ObservedObject var habit: HabitItem
+    @State var habit: HabitItem
     var onDelete: (HabitItem) -> ()
     
     @State private var isDeletingHabit = false
