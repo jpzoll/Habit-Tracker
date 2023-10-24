@@ -15,27 +15,34 @@ struct HabitDetail: View {
     @State var habit: HabitItem
     
     var body: some View {
-        VStack {
-            Text("\(habit.name)")
-                .font(.largeTitle)
-            Text("\(habit.description)")
-            Text("\(habit.emoji)")
-            Text("Days in a row: \(habit.dayStreak)")
-                .font(.headline)
-            Button {
-                if let index = habits.items.firstIndex(where: { $0.id == habit.id }) {
-                    // ➕ Increase the day streak and update the model
-                    habit.dayStreak += 1
-                    habits.items[index] = habit
+        ZStack {
+            Color.indigo
+                .ignoresSafeArea()
+            VStack {
+                Group {
+                    Text("\(habit.name)")
+                        .font(.largeTitle)
+                    Text("\(habit.description)")
+                    Text("\(habit.emoji)")
+                    Text("Days in a row: \(habit.dayStreak)")
+                        .font(.headline)
                 }
-            } label: {
-                Image(systemName: "plus")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .padding()
-                    .background(.gray)
-                    .clipShape(Circle())
-                    .foregroundColor(.white)
+                .foregroundColor(.white)
+                Button {
+                    if let index = habits.items.firstIndex(where: { $0.id == habit.id }) {
+                        // ➕ Increase the day streak and update the model
+                        habit.dayStreak += 1
+                        habits.items[index] = habit
+                    }
+                } label: {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .padding()
+                        .background(.gray)
+                        .clipShape(Circle())
+                        .foregroundColor(.white)
+                }
             }
         }
     }
